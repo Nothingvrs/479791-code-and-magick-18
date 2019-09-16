@@ -1,9 +1,11 @@
 # Учебный проект «Код и Магия» [![Build status][travis-image]][travis-url]
 
 * Студент: [Роман Верещагин](https://up.htmlacademy.ru/javascript/18/user/479791).
-* Наставник: `Неизвестно`.
+* Наставник: `Алексей Хапов`.
 
 ---
+
+
 
 _Не удаляйте и не обращайте внимание на файлы:_<br>
 _`.editorconfig`, `.eslintrc`, `.gitattributes`, `.gitignore`, `.travis.yml`, `package-lock.json`, `package.json`._
