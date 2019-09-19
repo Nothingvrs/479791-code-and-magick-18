@@ -22,27 +22,19 @@ var getMaxElement = function (arr) {
   return maxElement;
 };
 
-var gistogramColor = function (ctx, name) {
-  if (name === 'Вы') {
-    ctx.fillStyle = rgba(255, 0, 0, 1);
-  } else {
-    ctx.fillStyle = rgba(0, 0, 255, ' + Math.random() + ');
-  }
-};
-
 window.renderStatistics = function (ctx, players, times) {
   renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, 'rgba(0, 0, 0, 0.7)');
   renderCloud(ctx, CLOUD_X, CLOUD_Y, '#fff');
-
   ctx.fillStyle = '#000';
   ctx.font = '16pt PT Mono';
   ctx.fillText('Ура вы победили!', CLOUD_X + GAP_X, CLOUD_Y + GAP_X);
   ctx.fillText('Список результатов:', CLOUD_X + GAP_X, CLOUD_Y + GAP_Y + GAP);
   var maxTime = getMaxElement(times);
   for (var i = 0; i < players.length; i++) {
+    ctx.fillStyle = '#000';
     ctx.fillText(players[i], CLOUD_X + GAP_Y + (GAP_Y + TEXT_WIDTH) * i, CLOUD_Y + CLOUD_HEIGHT - GAP_X);
+    ctx.fillStyle = (players[i] === 'Вы') ? '#f00' : 'rgba(0, 0, 255, ' + Math.random() + ')';
     ctx.fillRect(CLOUD_X + GAP_Y + (GAP_Y + TEXT_WIDTH) * i, 150 + GAP_Y + GAP_X - (150 * times[i] / maxTime), 40, 150 * times[i] / maxTime);
-    gistogramColor(players[i]);
   }
 };
 
