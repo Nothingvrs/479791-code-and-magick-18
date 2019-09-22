@@ -20,7 +20,7 @@ var getRandomElement = function (arr) {
   return arr[rand];
 };
 
-var randomWizardCollection = function (count) {
+var createRandomWizardCollection = function (count) {
   for (var i = 0; i <= count; i++) {
     wizards[i] = {
       name: getRandomElement(WIZARD_NAMES),
@@ -47,6 +47,6 @@ var getDrawWizard = function (collection) {
   similarListElement.appendChild(fragment);
 };
 
-randomWizardCollection(COUNT_OF_WIZARD);
+createRandomWizardCollection(COUNT_OF_WIZARD);
 getDrawWizard(wizards);
 userDialog.querySelector('.setup-similar').classList.remove('hidden');
