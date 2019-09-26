@@ -101,13 +101,15 @@ nameInput.addEventListener('keydown', function (evt) {
 });
 
 wizardCoat.addEventListener('click', function () {
-  wizardCoat.style.fill = getRandomElement(WIZARD_COAT_COLOR);
-  coatInput.value = wizardCoat.style.fill;
+  var color = getRandomElement(WIZARD_COAT_COLOR);
+  wizardCoat.style.fill = color;
+  coatInput.value = color;
 });
 
 wizardEyes.addEventListener('click', function () {
-  wizardEyes.style.fill = getRandomElement(WIZARD_EYES_COLOR);
-  eyesInput.value = wizardEyes.style.fill;
+  var color = getRandomElement(WIZARD_EYES_COLOR);
+  wizardEyes.style.fill = color;
+  eyesInput.value = color;
 });
 
 wizardFireball.addEventListener('click', function () {
