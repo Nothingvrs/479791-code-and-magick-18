@@ -16,11 +16,13 @@ var setupWizard = document.querySelector('.setup-wizard');
 var wizardCoat = setupWizard.querySelector('.wizard-coat');
 var wizardEyes = setupWizard.querySelector('.wizard-eyes');
 var wizardFireball = setup.querySelector('.setup-fireball-wrap');
-var coatInput = setup.querySelector('.coat-color');
+var coatInput = setup.querySelector('[name = coat-color]');
+var eyesInput = setup.querySelector('[name = eyes-color]');
+var fireballInput = setup.querySelector(('[name = fireball-color]'));
 var wizards = [];
-var userDialog = document.querySelector('.setup');
 
-var similarListElement = userDialog.querySelector('.setup-similar-list');
+
+var similarListElement = setup.querySelector('.setup-similar-list');
 
 var similarWizardTemplate = document.querySelector('#similar-wizard-template')
     .content
@@ -100,17 +102,19 @@ nameInput.addEventListener('keydown', function (evt) {
 
 wizardCoat.addEventListener('click', function () {
   wizardCoat.style.fill = getRandomElement(WIZARD_COAT_COLOR);
-  coatInput.value = 'wizardCoat.style.fill';
+  coatInput.value = wizardCoat.style.fill;
 });
 
 wizardEyes.addEventListener('click', function () {
   wizardEyes.style.fill = getRandomElement(WIZARD_EYES_COLOR);
+  eyesInput.value = wizardEyes.style.fill;
 });
 
 wizardFireball.addEventListener('click', function () {
   wizardFireball.style.backgroundColor = getRandomElement(WIZARD_COLOR_FIREBALL);
+  fireballInput.value = wizardFireball.style.backgroundColor;
 });
 
 createRandomWizardCollection(COUNT_OF_WIZARD);
 getDrawWizard(wizards);
-userDialog.querySelector('.setup-similar').classList.remove('hidden');
+setup.querySelector('.setup-similar').classList.remove('hidden');
