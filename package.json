@@ -11,6 +11,7 @@
     "url": "https://github.com/htmlacademy-javascript/479791-code-and-magick-18/issues"
   },
   "devDependencies": {
+    "concurrently": "^4.1.2",
     "eslint": "6.3.0",
     "eslint-config-htmlacademy": "0.5.2"
   },
