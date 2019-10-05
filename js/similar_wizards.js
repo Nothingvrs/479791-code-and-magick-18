@@ -8,8 +8,10 @@
     .content
     .querySelector('.setup-similar-item');
 
+
   var getRandomInt = function (min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
+
   };
 
   var renderWizard = function (wizard) {
