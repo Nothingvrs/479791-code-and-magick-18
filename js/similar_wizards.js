@@ -33,5 +33,5 @@
     window.dialog.setup.querySelector('.setup-similar').classList.remove('hidden');
   };
 
-  window.backend.load(onLoad, window.backend.error);
+  window.backend.load(onLoad, window.backend.mistaken);
 })();

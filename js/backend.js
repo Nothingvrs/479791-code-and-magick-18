@@ -68,5 +68,5 @@
   window.backend = {};
   window.backend.save = upload;
   window.backend.load = load;
-  window.backend.error = onError;
+  window.backend.mistaken = onError;
 })();
