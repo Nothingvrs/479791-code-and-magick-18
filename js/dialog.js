@@ -8,6 +8,7 @@
   var nameInput = document.querySelector('.setup-user-name');
   var dialogHandler = window.setup.querySelector('.upload');
   var form = window.setup.querySelector('.setup-wizard-form');
+
   var onPopupEscPress = function (evt) {
     if (evt.keyCode === ESC_KEYCODE) {
       closePopup();
@@ -85,4 +86,5 @@
     window.backend.save(new FormData(form), onLoad, window.backend.error);
     evt.preventDefault();
   });
+
 })();
