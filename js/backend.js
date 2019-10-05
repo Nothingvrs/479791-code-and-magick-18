@@ -3,7 +3,7 @@
 (function () {
   var URL_SAVE = 'https://js.dump.academy/code-and-magick';
 
-  var upload = function (data, onSuccess, onError) {
+  var save = function (data, onSuccess, onError) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
 
@@ -66,7 +66,7 @@
   };
 
   window.backend = {};
-  window.backend.save = upload;
+  window.backend.save = save;
   window.backend.load = load;
   window.backend.mistaken = onError;
 })();
