@@ -2,23 +2,23 @@
 (function () {
   var ESC_KEYCODE = 27;
   var ENTER_KEYCODE = 13;
-  window.setup = document.querySelector('.setup');
+  var setup = document.querySelector('.setup');
   var setupOpen = document.querySelector('.setup-open');
-  var setupClose = window.setup.querySelector('.setup-close');
+  var setupClose = setup.querySelector('.setup-close');
   var nameInput = document.querySelector('.setup-user-name');
-  var dialogHandler = window.setup.querySelector('.upload');
-  var form = window.setup.querySelector('.setup-wizard-form');
+  var dialogHandler = setup.querySelector('.upload');
+  var setupWizard = setup.querySelector('.setup-wizard-form');
   var onPopupEscPress = function (evt) {
     if (evt.keyCode === ESC_KEYCODE) {
       closePopup();
     }
   };
   var openPopup = function () {
-    window.setup.classList.remove('hidden');
+    setup.classList.remove('hidden');
     document.addEventListener('keydown', onPopupEscPress);
   };
   var closePopup = function () {
-    window.setup.classList.add('hidden');
+    setup.classList.add('hidden');
     document.removeEventListener('keydown', onPopupEscPress);
   };
   setupOpen.addEventListener('click', function () {
@@ -58,8 +58,8 @@
         x: moveEvt.clientX,
         y: moveEvt.clientY
       };
-      window.setup.style.top = (window.setup.offsetTop - shift.y) + 'px';
-      window.setup.style.left = (window.setup.offsetLeft - shift.x) + 'px';
+      setup.style.top = (window.setup.offsetTop - shift.y) + 'px';
+      setup.style.left = (window.setup.offsetLeft - shift.x) + 'px';
     };
     var onMouseUp = function (upEvt) {
       upEvt.preventDefault();
@@ -78,11 +78,15 @@
   });
 
   var onLoad = function () {
-    window.setup.classList.add('hidden');
+    setup.classList.add('hidden');
   };
 
-  form.addEventListener('submit', function (evt) {
-    window.backend.save(new FormData(form), onLoad, window.backend.error);
+  setupWizard.addEventListener('submit', function (evt) {
+    window.backend.save(new FormData(setupWizard), onLoad, window.backend.error);
     evt.preventDefault();
   });
+
+  window.dialog = {};
+  window.dialog.setup = setup;
+  window.dialog.setupWizard = setupWizard;
 })();

@@ -1,9 +1,8 @@
 'use strict';
 (function () {
   var COUNT_OF_WIZARDS = 4;
-  window.setupWizard = document.querySelector('.setup-wizard');
-  var similarListElement = window.setup.querySelector('.setup-similar-list');
-  window.setup.querySelector('.setup-similar').classList.remove('hidden');
+  var similarListElement = window.dialog.setup.querySelector('.setup-similar-list');
+  window.dialog.setup.querySelector('.setup-similar').classList.remove('hidden');
 
   var similarWizardTemplate = document.querySelector('#similar-wizard-template')
     .content
@@ -29,7 +28,7 @@
     }
     similarListElement.appendChild(fragment);
 
-    window.setup.querySelector('.setup-similar').classList.remove('hidden');
+    window.dialog.setup.querySelector('.setup-similar').classList.remove('hidden');
   };
 
   window.backend.load(onLoad, window.backend.error);
