@@ -4,6 +4,29 @@
   var eyesColor;
   var wizards = [];
 
+  var similarWizardTemplate = document.querySelector('#similar-wizard-template')
+    .content
+    .querySelector('.setup-similar-item');
+
+  var renderWizard = function (wizard) {
+    var wizardElement = similarWizardTemplate.cloneNode(true);
+    wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
+    wizardElement.querySelector('.wizard-coat').style.fill = wizard.colorCoat;
+    wizardElement.querySelector('.wizard-eyes').style.fill = wizard.colorEyes;
+    return wizardElement;
+  };
+  var similar = document.querySelector('.setup-similar');
+  var similarList = window.dialog.setup.querySelector('.setup-similar-list');
+
+  var drawWizard = function (data) {
+    var takeNumber = data.length > 4 ? 4 : data.length;
+    similarList.innerHTML = '';
+    for (var i = 0; i < takeNumber; i++) {
+      similarList.appendChild(renderWizard(data[i]));
+    }
+    similar.classList.remove('hidden');
+  };
+
   var getRank = function (wizard) {
     var rank = 0;
     if (wizard.colorCoat === coatColor) {
@@ -26,7 +49,7 @@
   };
 
   var updateWizard = function () {
-    window.render.getDraw(wizards.sort(function (left, right) {
+    drawWizard(wizards.sort(function (left, right) {
       var rankDiff = getRank(right) - getRank(left);
       if (rankDiff === 0) {
         rankDiff = namesComparator(left.name, right.name);
@@ -35,20 +58,20 @@
     }));
   };
 
-  window.player.wizard.onEyesChange = window.debounce.get(function (color) {
+  window.player.wizard.onEyesChange = window.utils.debounce(function (color) {
     eyesColor = color;
     updateWizard();
   });
 
-  window.player.wizard.onCoatChange = window.debounce.get(function (color) {
+  window.player.wizard.onCoatChange = window.utils.debounce(function (color) {
     coatColor = color;
     updateWizard();
   });
 
-  var onLoad = function (data) {
+  var initWizards = function (data) {
     wizards = data;
     updateWizard(wizards);
   };
 
-  window.backend.load(onLoad, window.backend.mistaken);
+  window.backend.load(initWizards, window.utils.error);
 })();

@@ -40,6 +40,4 @@
 
   window.player = {};
   window.player.wizard = wizard;
-
-  return window.player.wizard;
 })();
