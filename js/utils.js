@@ -30,5 +30,5 @@
 
   window.utils = {};
   window.utils.debounce = debounce;
-  window.utils.error = renderErrorMessage;
+  window.utils.renderErrorMessage = renderErrorMessage;
 })();

@@ -18,7 +18,7 @@
   var similar = document.querySelector('.setup-similar');
   var similarList = window.dialog.setup.querySelector('.setup-similar-list');
 
-  var drawWizard = function (data) {
+  var drawWizards = function (data) {
     var takeNumber = data.length > 4 ? 4 : data.length;
     similarList.innerHTML = '';
     for (var i = 0; i < takeNumber; i++) {
@@ -48,8 +48,8 @@
     }
   };
 
-  var updateWizard = function () {
-    drawWizard(wizards.sort(function (left, right) {
+  var updateWizards = function () {
+    drawWizards(wizards.sort(function (left, right) {
       var rankDiff = getRank(right) - getRank(left);
       if (rankDiff === 0) {
         rankDiff = namesComparator(left.name, right.name);
@@ -60,18 +60,18 @@
 
   window.player.wizard.onEyesChange = window.utils.debounce(function (color) {
     eyesColor = color;
-    updateWizard();
+    updateWizards();
   });
 
   window.player.wizard.onCoatChange = window.utils.debounce(function (color) {
     coatColor = color;
-    updateWizard();
+    updateWizards();
   });
 
   var initWizards = function (data) {
     wizards = data;
-    updateWizard(wizards);
+    updateWizards(wizards);
   };
 
-  window.backend.load(initWizards, window.utils.error);
+  window.backend.load(initWizards, window.utils.renderErrorMessage);
 })();

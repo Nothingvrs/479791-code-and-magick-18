@@ -82,7 +82,7 @@
   };
 
   setupWizard.addEventListener('submit', function (evt) {
-    window.backend.save(new FormData(setupWizard), onLoad, window.backend.mistaken);
+    window.backend.save(new FormData(setupWizard), onLoad, window.utils.renderErrorMessage);
     evt.preventDefault();
   });
 
