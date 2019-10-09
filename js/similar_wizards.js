@@ -1,36 +1,53 @@
 'use strict';
 (function () {
-  var COUNT_OF_WIZARDS = 4;
-  var similarListElement = window.dialog.setup.querySelector('.setup-similar-list');
-  window.dialog.setup.querySelector('.setup-similar').classList.remove('hidden');
+  var coatColor;
+  var eyesColor;
+  var wizards = [];
 
-  var similarWizardTemplate = document.querySelector('#similar-wizard-template')
-    .content
-    .querySelector('.setup-similar-item');
-
-
-  var getRandomInt = function (min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-
-  };
-
-  var renderWizard = function (wizard) {
-    var wizardElement = similarWizardTemplate.cloneNode(true);
-    wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
-    wizardElement.querySelector('.wizard-coat').style.fill = wizard.colorCoat;
-    wizardElement.querySelector('.wizard-eyes').style.fill = wizard.colorEyes;
-    return wizardElement;
-  };
-
-  var onLoad = function (wizards) {
-    var fragment = document.createDocumentFragment();
-
-    for (var i = 0; i < COUNT_OF_WIZARDS; i++) {
-      fragment.appendChild(renderWizard(wizards[getRandomInt(0, wizards.length)]));
+  var getRank = function (wizard) {
+    var rank = 0;
+    if (wizard.colorCoat === coatColor) {
+      rank += 2;
     }
-    similarListElement.appendChild(fragment);
+    if (wizard.colorEyes === eyesColor) {
+      rank += 1;
+    }
+    return rank;
+  };
 
-    window.dialog.setup.querySelector('.setup-similar').classList.remove('hidden');
+  var namesComparator = function (left, right) {
+    if (left > right) {
+      return 1;
+    } else if (left < right) {
+      return -1;
+    } else {
+      return 0;
+    }
+  };
+
+  var updateWizard = function () {
+    window.render.getDraw(wizards.sort(function (left, right) {
+      var rankDiff = getRank(right) - getRank(left);
+      if (rankDiff === 0) {
+        rankDiff = namesComparator(left.name, right.name);
+      }
+      return rankDiff;
+    }));
+  };
+
+  window.player.wizard.onEyesChange = window.debounce.get(function (color) {
+    eyesColor = color;
+    updateWizard();
+  });
+
+  window.player.wizard.onCoatChange = window.debounce.get(function (color) {
+    coatColor = color;
+    updateWizard();
+  });
+
+  var onLoad = function (data) {
+    wizards = data;
+    updateWizard(wizards);
   };
 
   window.backend.load(onLoad, window.backend.mistaken);
